@@ -1,0 +1,5 @@
+sentencia.consola(2);
+sentencia.consola(2);
+sentencia.consola(2);
+sentencia.consola("hola");
+sentencia.consola(6+9);
