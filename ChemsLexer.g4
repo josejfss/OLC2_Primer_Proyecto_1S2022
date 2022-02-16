@@ -21,6 +21,7 @@ ID:             [a-zA-Z][a-zA-Z_0-9]*;
 CADENA:         '"'~["]*'"';
 COMMENT:        '(*' .*? '*)' -> skip;
 LINE_COMMENT:   '//' ~[\r\n]* -> skip;
+BOOLEANO:       'true' | 'false';
 
 COMA:               ',';
 PUNTO:              '.';
@@ -34,6 +35,7 @@ MAYORQUE:           '>';
 MENORQUE:           '<';
 POR:                '*';
 DIV:                '/';
+MOD:                '%';
 SUMA:               '+';
 RESTA:              '-';
 PARA:               '(';

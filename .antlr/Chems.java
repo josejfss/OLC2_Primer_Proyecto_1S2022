@@ -25,10 +25,10 @@ public class Chems extends Parser {
 	public static final int
 		RSENTENCIA=1, RCONSOLA=2, RPUBLICO=3, RMAIN=4, RINTEGER=5, RSTRING=6, 
 		RREAL=7, RBOOLEAN=8, RIF=9, RENTONCES=10, ENTERO=11, DECIMAL=12, ID=13, 
-		CADENA=14, COMMENT=15, LINE_COMMENT=16, COMA=17, PUNTO=18, PUNTOCOMA=19, 
-		OR=20, AND=21, NOT=22, MAYORIGUAL=23, MENORIGUAL=24, MAYORQUE=25, MENORQUE=26, 
-		POR=27, DIV=28, SUMA=29, RESTA=30, PARA=31, PARC=32, LLAVEA=33, LLAVEC=34, 
-		CORA=35, CORC=36, WHITESPACE=37;
+		CADENA=14, COMMENT=15, LINE_COMMENT=16, BOOLEANO=17, COMA=18, PUNTO=19, 
+		PUNTOCOMA=20, OR=21, AND=22, NOT=23, MAYORIGUAL=24, MENORIGUAL=25, MAYORQUE=26, 
+		MENORQUE=27, POR=28, DIV=29, MOD=30, SUMA=31, RESTA=32, PARA=33, PARC=34, 
+		LLAVEA=35, LLAVEC=36, CORA=37, CORC=38, WHITESPACE=39;
 	public static final int
 		RULE_start = 0, RULE_instrucciones = 1, RULE_instruccion = 2, RULE_expression = 3, 
 		RULE_expr_arit = 4, RULE_primitivo = 5;
@@ -43,9 +43,9 @@ public class Chems extends Parser {
 		return new String[] {
 			null, "'sentencia'", "'consola'", "'publico'", "'main'", "'integer'", 
 			"'string'", "'real'", "'boolean'", "'if'", "'entonces'", null, null, 
-			null, null, null, null, "','", "'.'", "';'", "'||'", "'&&'", "'!'", "'>='", 
-			"'<='", "'>'", "'<'", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "'{'", 
-			"'}'", "'['", "']'"
+			null, null, null, null, null, "','", "'.'", "';'", "'||'", "'&&'", "'!'", 
+			"'>='", "'<='", "'>'", "'<'", "'*'", "'/'", "'%'", "'+'", "'-'", "'('", 
+			"')'", "'{'", "'}'", "'['", "']'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -53,10 +53,10 @@ public class Chems extends Parser {
 		return new String[] {
 			null, "RSENTENCIA", "RCONSOLA", "RPUBLICO", "RMAIN", "RINTEGER", "RSTRING", 
 			"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "ENTERO", "DECIMAL", "ID", "CADENA", 
-			"COMMENT", "LINE_COMMENT", "COMA", "PUNTO", "PUNTOCOMA", "OR", "AND", 
-			"NOT", "MAYORIGUAL", "MENORIGUAL", "MAYORQUE", "MENORQUE", "POR", "DIV", 
-			"SUMA", "RESTA", "PARA", "PARC", "LLAVEA", "LLAVEC", "CORA", "CORC", 
-			"WHITESPACE"
+			"COMMENT", "LINE_COMMENT", "BOOLEANO", "COMA", "PUNTO", "PUNTOCOMA", 
+			"OR", "AND", "NOT", "MAYORIGUAL", "MENORIGUAL", "MAYORQUE", "MENORQUE", 
+			"POR", "DIV", "MOD", "SUMA", "RESTA", "PARA", "PARC", "LLAVEA", "LLAVEC", 
+			"CORA", "CORC", "WHITESPACE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -314,6 +314,7 @@ public class Chems extends Parser {
 		}
 		public TerminalNode POR() { return getToken(Chems.POR, 0); }
 		public TerminalNode DIV() { return getToken(Chems.DIV, 0); }
+		public TerminalNode MOD() { return getToken(Chems.MOD, 0); }
 		public TerminalNode SUMA() { return getToken(Chems.SUMA, 0); }
 		public TerminalNode RESTA() { return getToken(Chems.RESTA, 0); }
 		public Expr_aritContext(ParserRuleContext parent, int invokingState) {
@@ -344,6 +345,7 @@ public class Chems extends Parser {
 			case ENTERO:
 			case DECIMAL:
 			case CADENA:
+			case BOOLEANO:
 				{
 				setState(36);
 				((Expr_aritContext)_localctx).primitivo = primitivo();
@@ -387,7 +389,7 @@ public class Chems extends Parser {
 						setState(47);
 						((Expr_aritContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==POR || _la==DIV) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << POR) | (1L << DIV) | (1L << MOD))) != 0)) ) {
 							((Expr_aritContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -402,6 +404,8 @@ public class Chems extends Parser {
 						                  _localctx.p = Expresion.NuevaAritmetica(TS.POR, ((Expr_aritContext)_localctx).opIz.p, ((Expr_aritContext)_localctx).opDe.p, (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getLine():0), (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getCharPositionInLine():0))
 						                } else if (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getText():null) == "/"{
 						                  _localctx.p = Expresion.NuevaAritmetica(TS.DIV, ((Expr_aritContext)_localctx).opIz.p, ((Expr_aritContext)_localctx).opDe.p, (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getLine():0), (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getCharPositionInLine():0))
+						                } else if (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getText():null) == "%"{
+						                  _localctx.p = Expresion.NuevaAritmetica(TS.MOD, ((Expr_aritContext)_localctx).opIz.p, ((Expr_aritContext)_localctx).opDe.p, (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getLine():0), (((Expr_aritContext)_localctx).op!=null?((Expr_aritContext)_localctx).op.getCharPositionInLine():0))
 						                }
 						                
 						}
@@ -461,9 +465,11 @@ public class Chems extends Parser {
 		public Token ENTERO;
 		public Token CADENA;
 		public Token DECIMAL;
+		public Token BOOLEANO;
 		public TerminalNode ENTERO() { return getToken(Chems.ENTERO, 0); }
 		public TerminalNode CADENA() { return getToken(Chems.CADENA, 0); }
 		public TerminalNode DECIMAL() { return getToken(Chems.DECIMAL, 0); }
+		public TerminalNode BOOLEANO() { return getToken(Chems.BOOLEANO, 0); }
 		public PrimitivoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -474,7 +480,7 @@ public class Chems extends Parser {
 		PrimitivoContext _localctx = new PrimitivoContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_primitivo);
 		try {
-			setState(67);
+			setState(69);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ENTERO:
@@ -516,6 +522,20 @@ public class Chems extends Parser {
 				    
 				}
 				break;
+			case BOOLEANO:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(67);
+				((PrimitivoContext)_localctx).BOOLEANO = match(BOOLEANO);
+
+				      s, err := strconv.ParseBool((((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getText():null)); 
+				          if err == nil {
+				          fmt.Println(err)
+				        }
+				      _localctx.p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, (((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getLine():0), (((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getCharPositionInLine():0))
+				    
+				}
+				break;
 			default:
 				throw new NoViableAltException(this);
 			}
@@ -549,24 +569,25 @@ public class Chems extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\'H\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\2\3\3\7\3\23\n\3\f\3\16\3"+
-		"\26\13\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6/\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\7\6;\n\6\f\6\16\6>\13\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7F\n\7\3"+
-		"\7\2\3\n\b\2\4\6\b\n\f\2\4\3\2\35\36\3\2\37 \2G\2\16\3\2\2\2\4\24\3\2"+
-		"\2\2\6\31\3\2\2\2\b\"\3\2\2\2\n.\3\2\2\2\fE\3\2\2\2\16\17\5\4\3\2\17\20"+
-		"\b\2\1\2\20\3\3\2\2\2\21\23\5\6\4\2\22\21\3\2\2\2\23\26\3\2\2\2\24\22"+
-		"\3\2\2\2\24\25\3\2\2\2\25\27\3\2\2\2\26\24\3\2\2\2\27\30\b\3\1\2\30\5"+
-		"\3\2\2\2\31\32\7\3\2\2\32\33\7\24\2\2\33\34\7\4\2\2\34\35\7!\2\2\35\36"+
-		"\5\b\5\2\36\37\7\"\2\2\37 \7\25\2\2 !\b\4\1\2!\7\3\2\2\2\"#\5\n\6\2#$"+
-		"\b\5\1\2$\t\3\2\2\2%&\b\6\1\2&\'\5\f\7\2\'(\b\6\1\2(/\3\2\2\2)*\7!\2\2"+
-		"*+\5\b\5\2+,\7\"\2\2,-\b\6\1\2-/\3\2\2\2.%\3\2\2\2.)\3\2\2\2/<\3\2\2\2"+
-		"\60\61\f\6\2\2\61\62\t\2\2\2\62\63\5\n\6\7\63\64\b\6\1\2\64;\3\2\2\2\65"+
-		"\66\f\5\2\2\66\67\t\3\2\2\678\5\n\6\689\b\6\1\29;\3\2\2\2:\60\3\2\2\2"+
-		":\65\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\13\3\2\2\2><\3\2\2\2?@\7\r"+
-		"\2\2@F\b\7\1\2AB\7\20\2\2BF\b\7\1\2CD\7\16\2\2DF\b\7\1\2E?\3\2\2\2EA\3"+
-		"\2\2\2EC\3\2\2\2F\r\3\2\2\2\7\24.:<E";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)J\4\2\t\2\4\3\t\3"+
+		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\2\3\3\7\3\23\n\3\f\3\16\3\26"+
+		"\13\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6/\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\7\6;\n\6\f\6\16\6>\13\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7H"+
+		"\n\7\3\7\2\3\n\b\2\4\6\b\n\f\2\4\3\2\36 \3\2!\"\2J\2\16\3\2\2\2\4\24\3"+
+		"\2\2\2\6\31\3\2\2\2\b\"\3\2\2\2\n.\3\2\2\2\fG\3\2\2\2\16\17\5\4\3\2\17"+
+		"\20\b\2\1\2\20\3\3\2\2\2\21\23\5\6\4\2\22\21\3\2\2\2\23\26\3\2\2\2\24"+
+		"\22\3\2\2\2\24\25\3\2\2\2\25\27\3\2\2\2\26\24\3\2\2\2\27\30\b\3\1\2\30"+
+		"\5\3\2\2\2\31\32\7\3\2\2\32\33\7\25\2\2\33\34\7\4\2\2\34\35\7#\2\2\35"+
+		"\36\5\b\5\2\36\37\7$\2\2\37 \7\26\2\2 !\b\4\1\2!\7\3\2\2\2\"#\5\n\6\2"+
+		"#$\b\5\1\2$\t\3\2\2\2%&\b\6\1\2&\'\5\f\7\2\'(\b\6\1\2(/\3\2\2\2)*\7#\2"+
+		"\2*+\5\b\5\2+,\7$\2\2,-\b\6\1\2-/\3\2\2\2.%\3\2\2\2.)\3\2\2\2/<\3\2\2"+
+		"\2\60\61\f\6\2\2\61\62\t\2\2\2\62\63\5\n\6\7\63\64\b\6\1\2\64;\3\2\2\2"+
+		"\65\66\f\5\2\2\66\67\t\3\2\2\678\5\n\6\689\b\6\1\29;\3\2\2\2:\60\3\2\2"+
+		"\2:\65\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\13\3\2\2\2><\3\2\2\2?@\7"+
+		"\r\2\2@H\b\7\1\2AB\7\20\2\2BH\b\7\1\2CD\7\16\2\2DH\b\7\1\2EF\7\23\2\2"+
+		"FH\b\7\1\2G?\3\2\2\2GA\3\2\2\2GC\3\2\2\2GE\3\2\2\2H\r\3\2\2\2\7\24.:<"+
+		"G";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

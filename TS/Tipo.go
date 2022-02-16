@@ -4,6 +4,11 @@ type TIPO int
 type OperadorAritmetico int
 type OperadorRelacional int
 type OperadorLogico int
+type Error int
+
+const (
+	ERRROR Error = iota
+)
 
 const (
 	ENTERO TIPO = iota

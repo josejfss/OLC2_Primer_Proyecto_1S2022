@@ -9,7 +9,7 @@ import (
 type Arbol struct {
 	instrucciones *arraylist.List
 	funciones     []interface{}
-	excepciones   []Excepcion
+	excepciones   arraylist.List
 	consola       string
 	dot           string
 	contador      int
@@ -18,7 +18,7 @@ type Arbol struct {
 
 func NuevoArbol() Arbol {
 	var funciones []interface{}
-	var excepciones []Excepcion
+	var excepciones arraylist.List
 	var TSglobal TablaSimbolo
 	var instrucciones *arraylist.List
 	newTree := Arbol{instrucciones, funciones, excepciones, "", "", 0, TSglobal}
@@ -33,12 +33,16 @@ func (p Arbol) GetInstrucciones() *arraylist.List {
 	return p.instrucciones
 }
 
-func (p *Arbol) SetExcepciones(excepciones []Excepcion) {
+func (p *Arbol) SetExcepciones(excepciones arraylist.List) {
 	p.excepciones = excepciones
 }
 
 func (p Arbol) GetExcepciones() interface{} {
 	return p.excepciones
+}
+
+func (p Arbol) UpdateExcepciones(excepcion Excepcion){
+	p.excepciones.Add(excepcion)
 }
 
 func (p *Arbol) SetConsola(consola string) {
