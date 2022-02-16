@@ -1465,7 +1465,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 				return localctx.(*PrimitivoContext).Get_DECIMAL().GetText()
 			}
 		}()), 64)
-		if err == nil {
+		if err != nil {
 			fmt.Println(err)
 		}
 		localctx.(*PrimitivoContext).p = Expresion.NuevoPrimitivo(s, TS.DECIMAL, (func() int {
@@ -1499,7 +1499,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 				return localctx.(*PrimitivoContext).Get_BOOLEANO().GetText()
 			}
 		}()))
-		if err == nil {
+		if err != nil {
 			fmt.Println(err)
 		}
 		localctx.(*PrimitivoContext).p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, (func() int {
