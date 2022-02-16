@@ -515,7 +515,7 @@ public class Chems extends Parser {
 				((PrimitivoContext)_localctx).DECIMAL = match(DECIMAL);
 
 				      s, err := strconv.ParseFloat((((PrimitivoContext)_localctx).DECIMAL!=null?((PrimitivoContext)_localctx).DECIMAL.getText():null), 64); 
-				          if err == nil {
+				          if err != nil {
 				          fmt.Println(err)
 				        }
 				      _localctx.p = Expresion.NuevoPrimitivo(s, TS.DECIMAL, (((PrimitivoContext)_localctx).DECIMAL!=null?((PrimitivoContext)_localctx).DECIMAL.getLine():0), (((PrimitivoContext)_localctx).DECIMAL!=null?((PrimitivoContext)_localctx).DECIMAL.getCharPositionInLine():0))
@@ -529,7 +529,7 @@ public class Chems extends Parser {
 				((PrimitivoContext)_localctx).BOOLEANO = match(BOOLEANO);
 
 				      s, err := strconv.ParseBool((((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getText():null)); 
-				          if err == nil {
+				          if err != nil {
 				          fmt.Println(err)
 				        }
 				      _localctx.p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, (((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getLine():0), (((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getCharPositionInLine():0))
