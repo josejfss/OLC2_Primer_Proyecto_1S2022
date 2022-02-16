@@ -74,14 +74,14 @@ primitivo returns[interfaces.Expresion p]
       }
     | DECIMAL {
       s, err := strconv.ParseFloat($DECIMAL.text, 64); 
-          if err == nil {
+          if err != nil {
           fmt.Println(err)
         }
       $p = Expresion.NuevoPrimitivo(s, TS.DECIMAL, $DECIMAL.line, $DECIMAL.pos)
     }
     |BOOLEANO {
       s, err := strconv.ParseBool($BOOLEANO.text); 
-          if err == nil {
+          if err != nil {
           fmt.Println(err)
         }
       $p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, $BOOLEANO.line, $BOOLEANO.pos)
