@@ -4,6 +4,7 @@ import (
 	"OLC2/TS"
 	"OLC2/interfaces"
 	"fmt"
+	"math"
 	"strconv"
 )
 
@@ -174,9 +175,82 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 		retorno.Tipo = TS.ERROR
 		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de multiplicacion invalido", p.fila, p.columna)
 		return retorno
-	//MULTIPLICACION
-	}
+	//DIVISION
+	}else if p.operador == TS.DIV {
+		if izq.Tipo == TS.ENTERO && der.Tipo == TS.ENTERO {
+			retorno.Tipo = TS.ENTERO
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := izq.Valor.(int) / der.Valor.(int)
+			retorno.Valor = resultado
+			return retorno
+		} else if izq.Tipo == TS.ENTERO && der.Tipo == TS.DECIMAL {
+			retorno.Tipo = TS.DECIMAL
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := float64(izq.Valor.(int)) / der.Valor.(float64)
+			retorno.Valor = resultado
+			return retorno
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.ENTERO {
+			retorno.Tipo = TS.DECIMAL
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := izq.Valor.(float64) / float64(der.Valor.(int))
+			retorno.Valor = resultado
+			return retorno
+		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
+			retorno.Tipo = TS.DECIMAL
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := izq.Valor.(float64) / der.Valor.(float64)
+			retorno.Valor = resultado
+			return retorno
+		}
 
+		//error en suma
+		retorno.Tipo = TS.ERROR
+		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de division invalido", p.fila, p.columna)
+		return retorno
+	//MODULO
+	} else if p.operador == TS.MOD {
+		if izq.Tipo == TS.ENTERO && der.Tipo == TS.ENTERO {
+			retorno.Tipo = TS.DECIMAL
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := float64(izq.Valor.(int) % der.Valor.(int))
+			retorno.Valor = resultado
+			return retorno
+		} else if izq.Tipo == TS.ENTERO && der.Tipo == TS.DECIMAL {
+			retorno.Tipo = TS.DECIMAL
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := math.Mod(float64(izq.Valor.(int)), der.Valor.(float64))
+			retorno.Valor = resultado
+			return retorno
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.ENTERO {
+			retorno.Tipo = TS.DECIMAL
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := math.Mod(izq.Valor.(float64), float64(der.Valor.(int)))
+			retorno.Valor = resultado
+			return retorno
+		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
+			retorno.Tipo = TS.DECIMAL
+			retorno.Columna = p.columna
+			retorno.Fila = p.fila
+			resultado := math.Mod(izq.Valor.(float64), der.Valor.(float64))
+			retorno.Valor = resultado
+			return retorno
+		}
+
+		//error en suma
+		retorno.Tipo = TS.ERROR
+		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de MODULO invalido", p.fila, p.columna)
+		return retorno
+	//DIVISION
+	}
+	retorno.Tipo = TS.ERROR
+	retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion Aritmetica invalida", p.fila, p.columna)
 	return retorno
 
 }
