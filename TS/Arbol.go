@@ -41,7 +41,7 @@ func (p Arbol) GetExcepciones() interface{} {
 	return p.excepciones
 }
 
-func (p Arbol) UpdateExcepciones(excepcion Excepcion){
+func (p Arbol) UpdateExcepciones(excepcion interface{}) {
 	p.excepciones.Add(excepcion)
 }
 

@@ -19,6 +19,11 @@ func NuevoImprimir(valor interfaces.Expresion, fila int, columna int) Imprimir {
 func (p Imprimir) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interface{} {
 
 	value := p.expresion.Interpretar(interfaces.Ast, table)
+
+	if value.Tipo == TS.ERROR {
+		return value.Valor
+	}
+
 	interfaces.Ast.UpdateConsola(value.Valor)
 	return nil
 }

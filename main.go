@@ -26,7 +26,12 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	interfaces.Ast.SetTSglobal(TSGlobal)
 
 	for _, s := range interfaces.Ast.GetInstrucciones().ToArray() {
-		s.(interfaces.Instruccion).Interpretar(interfaces.Ast, TSGlobal)
+		result := s.(interfaces.Instruccion).Interpretar(interfaces.Ast, TSGlobal)
+
+		if result != nil {
+			interfaces.Ast.UpdateConsola(fmt.Sprint(result))
+			interfaces.Ast.UpdateExcepciones(result)
+		}
 	}
 
 	fmt.Println(interfaces.Ast.GetConsola())

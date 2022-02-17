@@ -29,8 +29,14 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 	var retorno interfaces.Symbol
 
 	izq = p.operacionIzq.Interpretar(tree, table)
+	if izq.Tipo == TS.ERROR {
+		return izq
+	}
 	if p.operacionDer != nil {
 		der = p.operacionDer.Interpretar(tree, table)
+		if der.Tipo == TS.ERROR {
+			return der
+		}
 	}
 
 	if p.operador == TS.MAS {
@@ -48,7 +54,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			resultado := float64(izq.Valor.(int)) + der.Valor.(float64)
 			retorno.Valor = resultado
 			return retorno
-		}else if izq.Tipo == TS.ENTERO && der.Tipo == TS.CADENA {
+		} else if izq.Tipo == TS.ENTERO && der.Tipo == TS.CADENA {
 			retorno.Tipo = TS.CADENA
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
@@ -62,7 +68,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			resultado := izq.Valor.(string) + strconv.Itoa(der.Valor.(int))
 			retorno.Valor = resultado
 			return retorno
-		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.CADENA {
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.CADENA {
 			retorno.Tipo = TS.CADENA
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
@@ -73,7 +79,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			retorno.Tipo = TS.CADENA
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
-			resultado := izq.Valor.(string) + fmt.Sprintf("%.2f",der.Valor.(float64))
+			resultado := izq.Valor.(string) + fmt.Sprintf("%.2f", der.Valor.(float64))
 			retorno.Valor = resultado
 			return retorno
 		} else if izq.Tipo == TS.CADENA && der.Tipo == TS.CADENA {
@@ -90,7 +96,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			resultado := izq.Valor.(float64) + float64(der.Valor.(int))
 			retorno.Valor = resultado
 			return retorno
-		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
 			retorno.Tipo = TS.DECIMAL
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
@@ -103,8 +109,8 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 		retorno.Tipo = TS.ERROR
 		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de suma invalido", p.fila, p.columna)
 		return retorno
-	//RESTA
-	}else if p.operador == TS.MENOS {
+		//RESTA
+	} else if p.operador == TS.MENOS {
 		if izq.Tipo == TS.ENTERO && der.Tipo == TS.ENTERO {
 			retorno.Tipo = TS.ENTERO
 			retorno.Columna = p.columna
@@ -126,7 +132,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			resultado := izq.Valor.(float64) - float64(der.Valor.(int))
 			retorno.Valor = resultado
 			return retorno
-		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
 			retorno.Tipo = TS.DECIMAL
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
@@ -139,8 +145,8 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 		retorno.Tipo = TS.ERROR
 		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de resta invalido", p.fila, p.columna)
 		return retorno
-	//MULTIPLICACION
-	}else if p.operador == TS.POR {
+		//MULTIPLICACION
+	} else if p.operador == TS.POR {
 		if izq.Tipo == TS.ENTERO && der.Tipo == TS.ENTERO {
 			retorno.Tipo = TS.ENTERO
 			retorno.Columna = p.columna
@@ -162,7 +168,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			resultado := izq.Valor.(float64) * float64(der.Valor.(int))
 			retorno.Valor = resultado
 			return retorno
-		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
 			retorno.Tipo = TS.DECIMAL
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
@@ -175,8 +181,8 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 		retorno.Tipo = TS.ERROR
 		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de multiplicacion invalido", p.fila, p.columna)
 		return retorno
-	//DIVISION
-	}else if p.operador == TS.DIV {
+		//DIVISION
+	} else if p.operador == TS.DIV {
 		if izq.Tipo == TS.ENTERO && der.Tipo == TS.ENTERO {
 			retorno.Tipo = TS.ENTERO
 			retorno.Columna = p.columna
@@ -198,7 +204,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			resultado := izq.Valor.(float64) / float64(der.Valor.(int))
 			retorno.Valor = resultado
 			return retorno
-		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
 			retorno.Tipo = TS.DECIMAL
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
@@ -211,7 +217,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 		retorno.Tipo = TS.ERROR
 		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de division invalido", p.fila, p.columna)
 		return retorno
-	//MODULO
+		//MODULO
 	} else if p.operador == TS.MOD {
 		if izq.Tipo == TS.ENTERO && der.Tipo == TS.ENTERO {
 			retorno.Tipo = TS.DECIMAL
@@ -234,7 +240,7 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 			resultado := math.Mod(izq.Valor.(float64), float64(der.Valor.(int)))
 			retorno.Valor = resultado
 			return retorno
-		}else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
+		} else if izq.Tipo == TS.DECIMAL && der.Tipo == TS.DECIMAL {
 			retorno.Tipo = TS.DECIMAL
 			retorno.Columna = p.columna
 			retorno.Fila = p.fila
@@ -247,22 +253,10 @@ func (p Aritmetica) Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interfaces
 		retorno.Tipo = TS.ERROR
 		retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion de MODULO invalido", p.fila, p.columna)
 		return retorno
-	//DIVISION
+		//DIVISION
 	}
 	retorno.Tipo = TS.ERROR
 	retorno.Valor = TS.NuevaExcepcion("Semantico", "Operacion Aritmetica invalida", p.fila, p.columna)
 	return retorno
 
-}
-
-func (p Aritmetica) ObtenerValor(tipo TS.TIPO, valor interface{}) interface{} {
-	if tipo == TS.ENTERO {
-		return valor.(int)
-	} else if tipo == TS.DECIMAL {
-		return valor.(float64)
-	} else if tipo == TS.BOOLEANO {
-		return valor.(bool)
-	} else {
-		return valor.(string)
-	}
 }
