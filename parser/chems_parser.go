@@ -47,8 +47,8 @@ var parserATN = []uint16{
 	3, 2, 2, 55, 56, 5, 10, 6, 6, 56, 57, 8, 6, 1, 2, 57, 59, 3, 2, 2, 2, 58,
 	48, 3, 2, 2, 2, 58, 53, 3, 2, 2, 2, 59, 62, 3, 2, 2, 2, 60, 58, 3, 2, 2,
 	2, 60, 61, 3, 2, 2, 2, 61, 11, 3, 2, 2, 2, 62, 60, 3, 2, 2, 2, 63, 64,
-	7, 13, 2, 2, 64, 72, 8, 7, 1, 2, 65, 66, 7, 16, 2, 2, 66, 72, 8, 7, 1,
-	2, 67, 68, 7, 14, 2, 2, 68, 72, 8, 7, 1, 2, 69, 70, 7, 19, 2, 2, 70, 72,
+	7, 14, 2, 2, 64, 72, 8, 7, 1, 2, 65, 66, 7, 17, 2, 2, 66, 72, 8, 7, 1,
+	2, 67, 68, 7, 15, 2, 2, 68, 72, 8, 7, 1, 2, 69, 70, 7, 13, 2, 2, 70, 72,
 	8, 7, 1, 2, 71, 63, 3, 2, 2, 2, 71, 65, 3, 2, 2, 2, 71, 67, 3, 2, 2, 2,
 	71, 69, 3, 2, 2, 2, 72, 13, 3, 2, 2, 2, 7, 20, 46, 58, 60, 71,
 }
@@ -63,11 +63,11 @@ var literalNames = []string{
 }
 var symbolicNames = []string{
 	"", "RSENTENCIA", "RCONSOLA", "RPUBLICO", "RMAIN", "RINTEGER", "RSTRING",
-	"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "ENTERO", "DECIMAL", "ID", "CADENA",
-	"COMMENT", "LINE_COMMENT", "BOOLEANO", "COMA", "PUNTO", "PUNTOCOMA", "OR",
-	"AND", "NOT", "MAYORIGUAL", "MENORIGUAL", "MAYORQUE", "MENORQUE", "POR",
-	"DIV", "MOD", "SUMA", "RESTA", "PARA", "PARC", "LLAVEA", "LLAVEC", "CORA",
-	"CORC", "WHITESPACE",
+	"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "RBOOLEANO", "ENTERO", "DECIMAL",
+	"ID", "CADENA", "COMMENT", "LINE_COMMENT", "COMA", "PUNTO", "PUNTOCOMA",
+	"OR", "AND", "NOT", "MAYORIGUAL", "MENORIGUAL", "MAYORQUE", "MENORQUE",
+	"POR", "DIV", "MOD", "SUMA", "RESTA", "PARA", "PARC", "LLAVEA", "LLAVEC",
+	"CORA", "CORC", "WHITESPACE",
 }
 
 var ruleNames = []string{
@@ -112,13 +112,13 @@ const (
 	ChemsRBOOLEAN     = 8
 	ChemsRIF          = 9
 	ChemsRENTONCES    = 10
-	ChemsENTERO       = 11
-	ChemsDECIMAL      = 12
-	ChemsID           = 13
-	ChemsCADENA       = 14
-	ChemsCOMMENT      = 15
-	ChemsLINE_COMMENT = 16
-	ChemsBOOLEANO     = 17
+	ChemsRBOOLEANO    = 11
+	ChemsENTERO       = 12
+	ChemsDECIMAL      = 13
+	ChemsID           = 14
+	ChemsCADENA       = 15
+	ChemsCOMMENT      = 16
+	ChemsLINE_COMMENT = 17
 	ChemsCOMA         = 18
 	ChemsPUNTO        = 19
 	ChemsPUNTOCOMA    = 20
@@ -994,7 +994,7 @@ func (p *Chems) expr_arit(_p int) (localctx IExpr_aritContext) {
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case ChemsENTERO, ChemsDECIMAL, ChemsCADENA, ChemsBOOLEANO:
+	case ChemsRBOOLEANO, ChemsENTERO, ChemsDECIMAL, ChemsCADENA:
 		{
 			p.SetState(36)
 
@@ -1240,8 +1240,8 @@ type IPrimitivoContext interface {
 	// Get_DECIMAL returns the _DECIMAL token.
 	Get_DECIMAL() antlr.Token
 
-	// Get_BOOLEANO returns the _BOOLEANO token.
-	Get_BOOLEANO() antlr.Token
+	// Get_RBOOLEANO returns the _RBOOLEANO token.
+	Get_RBOOLEANO() antlr.Token
 
 	// Set_ENTERO sets the _ENTERO token.
 	Set_ENTERO(antlr.Token)
@@ -1252,8 +1252,8 @@ type IPrimitivoContext interface {
 	// Set_DECIMAL sets the _DECIMAL token.
 	Set_DECIMAL(antlr.Token)
 
-	// Set_BOOLEANO sets the _BOOLEANO token.
-	Set_BOOLEANO(antlr.Token)
+	// Set_RBOOLEANO sets the _RBOOLEANO token.
+	Set_RBOOLEANO(antlr.Token)
 
 	// GetP returns the p attribute.
 	GetP() interfaces.Expresion
@@ -1267,12 +1267,12 @@ type IPrimitivoContext interface {
 
 type PrimitivoContext struct {
 	*antlr.BaseParserRuleContext
-	parser    antlr.Parser
-	p         interfaces.Expresion
-	_ENTERO   antlr.Token
-	_CADENA   antlr.Token
-	_DECIMAL  antlr.Token
-	_BOOLEANO antlr.Token
+	parser     antlr.Parser
+	p          interfaces.Expresion
+	_ENTERO    antlr.Token
+	_CADENA    antlr.Token
+	_DECIMAL   antlr.Token
+	_RBOOLEANO antlr.Token
 }
 
 func NewEmptyPrimitivoContext() *PrimitivoContext {
@@ -1303,7 +1303,7 @@ func (s *PrimitivoContext) Get_CADENA() antlr.Token { return s._CADENA }
 
 func (s *PrimitivoContext) Get_DECIMAL() antlr.Token { return s._DECIMAL }
 
-func (s *PrimitivoContext) Get_BOOLEANO() antlr.Token { return s._BOOLEANO }
+func (s *PrimitivoContext) Get_RBOOLEANO() antlr.Token { return s._RBOOLEANO }
 
 func (s *PrimitivoContext) Set_ENTERO(v antlr.Token) { s._ENTERO = v }
 
@@ -1311,7 +1311,7 @@ func (s *PrimitivoContext) Set_CADENA(v antlr.Token) { s._CADENA = v }
 
 func (s *PrimitivoContext) Set_DECIMAL(v antlr.Token) { s._DECIMAL = v }
 
-func (s *PrimitivoContext) Set_BOOLEANO(v antlr.Token) { s._BOOLEANO = v }
+func (s *PrimitivoContext) Set_RBOOLEANO(v antlr.Token) { s._RBOOLEANO = v }
 
 func (s *PrimitivoContext) GetP() interfaces.Expresion { return s.p }
 
@@ -1329,8 +1329,8 @@ func (s *PrimitivoContext) DECIMAL() antlr.TerminalNode {
 	return s.GetToken(ChemsDECIMAL, 0)
 }
 
-func (s *PrimitivoContext) BOOLEANO() antlr.TerminalNode {
-	return s.GetToken(ChemsBOOLEANO, 0)
+func (s *PrimitivoContext) RBOOLEANO() antlr.TerminalNode {
+	return s.GetToken(ChemsRBOOLEANO, 0)
 }
 
 func (s *PrimitivoContext) GetRuleContext() antlr.RuleContext {
@@ -1482,37 +1482,37 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 			}
 		}()))
 
-	case ChemsBOOLEANO:
+	case ChemsRBOOLEANO:
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(67)
 
-			var _m = p.Match(ChemsBOOLEANO)
+			var _m = p.Match(ChemsRBOOLEANO)
 
-			localctx.(*PrimitivoContext)._BOOLEANO = _m
+			localctx.(*PrimitivoContext)._RBOOLEANO = _m
 		}
 
 		s, err := strconv.ParseBool((func() string {
-			if localctx.(*PrimitivoContext).Get_BOOLEANO() == nil {
+			if localctx.(*PrimitivoContext).Get_RBOOLEANO() == nil {
 				return ""
 			} else {
-				return localctx.(*PrimitivoContext).Get_BOOLEANO().GetText()
+				return localctx.(*PrimitivoContext).Get_RBOOLEANO().GetText()
 			}
 		}()))
 		if err != nil {
 			fmt.Println(err)
 		}
 		localctx.(*PrimitivoContext).p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, (func() int {
-			if localctx.(*PrimitivoContext).Get_BOOLEANO() == nil {
+			if localctx.(*PrimitivoContext).Get_RBOOLEANO() == nil {
 				return 0
 			} else {
-				return localctx.(*PrimitivoContext).Get_BOOLEANO().GetLine()
+				return localctx.(*PrimitivoContext).Get_RBOOLEANO().GetLine()
 			}
 		}()), (func() int {
-			if localctx.(*PrimitivoContext).Get_BOOLEANO() == nil {
+			if localctx.(*PrimitivoContext).Get_RBOOLEANO() == nil {
 				return 0
 			} else {
-				return localctx.(*PrimitivoContext).Get_BOOLEANO().GetColumn()
+				return localctx.(*PrimitivoContext).Get_RBOOLEANO().GetColumn()
 			}
 		}()))
 

@@ -40,7 +40,7 @@ expression returns[interfaces.Expresion p]
 ;
 
 expr_arit returns[interfaces.Expresion p]
-    : opIz = expr_arit op=( POR| DIV| MOD) opDe = expr_arit {
+    : opIz = expr_arit op=(POR| DIV| MOD) opDe = expr_arit {
       if $op.text == "*"{
         $p = Expresion.NuevaAritmetica(TS.POR, $opIz.p, $opDe.p, $op.line, $op.pos)
       } else if $op.text == "/"{
@@ -79,11 +79,11 @@ primitivo returns[interfaces.Expresion p]
         }
       $p = Expresion.NuevoPrimitivo(s, TS.DECIMAL, $DECIMAL.line, $DECIMAL.pos)
     }
-    |BOOLEANO {
-      s, err := strconv.ParseBool($BOOLEANO.text); 
+    |RBOOLEANO {
+      s, err := strconv.ParseBool($RBOOLEANO.text); 
           if err != nil {
           fmt.Println(err)
         }
-      $p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, $BOOLEANO.line, $BOOLEANO.pos)
+      $p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, $RBOOLEANO.line, $RBOOLEANO.pos)
     }
 ;

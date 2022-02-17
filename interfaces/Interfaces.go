@@ -15,9 +15,6 @@ type Expresion interface {
 	Interpretar(tree TS.Arbol, table TS.TablaSimbolo) Symbol
 }
 
-type Instruction interface {
-	Ejecutar() interface{}
-}
 
 type Instruccion interface {
 	Interpretar(tree TS.Arbol, table TS.TablaSimbolo) interface{}

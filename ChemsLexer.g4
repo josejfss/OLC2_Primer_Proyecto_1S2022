@@ -13,15 +13,17 @@ RREAL:          'real';
 RBOOLEAN:       'boolean';
 RIF:            'if';
 RENTONCES:      'entonces';
+RBOOLEANO:          ('true'|'false');
 
 
 ENTERO:         [0-9]+;
 DECIMAL:        [0-9]+'.'[0-9]+;  
 ID:             [a-zA-Z][a-zA-Z_0-9]*;      
 CADENA:         '"'~["]*'"';
+
 COMMENT:        '(*' .*? '*)' -> skip;
 LINE_COMMENT:   '//' ~[\r\n]* -> skip;
-BOOLEANO:       'true' | 'false';
+
 
 COMA:               ',';
 PUNTO:              '.';

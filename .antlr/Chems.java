@@ -24,11 +24,11 @@ public class Chems extends Parser {
 		new PredictionContextCache();
 	public static final int
 		RSENTENCIA=1, RCONSOLA=2, RPUBLICO=3, RMAIN=4, RINTEGER=5, RSTRING=6, 
-		RREAL=7, RBOOLEAN=8, RIF=9, RENTONCES=10, ENTERO=11, DECIMAL=12, ID=13, 
-		CADENA=14, COMMENT=15, LINE_COMMENT=16, BOOLEANO=17, COMA=18, PUNTO=19, 
-		PUNTOCOMA=20, OR=21, AND=22, NOT=23, MAYORIGUAL=24, MENORIGUAL=25, MAYORQUE=26, 
-		MENORQUE=27, POR=28, DIV=29, MOD=30, SUMA=31, RESTA=32, PARA=33, PARC=34, 
-		LLAVEA=35, LLAVEC=36, CORA=37, CORC=38, WHITESPACE=39;
+		RREAL=7, RBOOLEAN=8, RIF=9, RENTONCES=10, RBOOLEANO=11, ENTERO=12, DECIMAL=13, 
+		ID=14, CADENA=15, COMMENT=16, LINE_COMMENT=17, COMA=18, PUNTO=19, PUNTOCOMA=20, 
+		OR=21, AND=22, NOT=23, MAYORIGUAL=24, MENORIGUAL=25, MAYORQUE=26, MENORQUE=27, 
+		POR=28, DIV=29, MOD=30, SUMA=31, RESTA=32, PARA=33, PARC=34, LLAVEA=35, 
+		LLAVEC=36, CORA=37, CORC=38, WHITESPACE=39;
 	public static final int
 		RULE_start = 0, RULE_instrucciones = 1, RULE_instruccion = 2, RULE_expression = 3, 
 		RULE_expr_arit = 4, RULE_primitivo = 5;
@@ -52,8 +52,8 @@ public class Chems extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "RSENTENCIA", "RCONSOLA", "RPUBLICO", "RMAIN", "RINTEGER", "RSTRING", 
-			"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "ENTERO", "DECIMAL", "ID", "CADENA", 
-			"COMMENT", "LINE_COMMENT", "BOOLEANO", "COMA", "PUNTO", "PUNTOCOMA", 
+			"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "RBOOLEANO", "ENTERO", "DECIMAL", 
+			"ID", "CADENA", "COMMENT", "LINE_COMMENT", "COMA", "PUNTO", "PUNTOCOMA", 
 			"OR", "AND", "NOT", "MAYORIGUAL", "MENORIGUAL", "MAYORQUE", "MENORQUE", 
 			"POR", "DIV", "MOD", "SUMA", "RESTA", "PARA", "PARC", "LLAVEA", "LLAVEC", 
 			"CORA", "CORC", "WHITESPACE"
@@ -342,10 +342,10 @@ public class Chems extends Parser {
 			setState(44);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
+			case RBOOLEANO:
 			case ENTERO:
 			case DECIMAL:
 			case CADENA:
-			case BOOLEANO:
 				{
 				setState(36);
 				((Expr_aritContext)_localctx).primitivo = primitivo();
@@ -465,11 +465,11 @@ public class Chems extends Parser {
 		public Token ENTERO;
 		public Token CADENA;
 		public Token DECIMAL;
-		public Token BOOLEANO;
+		public Token RBOOLEANO;
 		public TerminalNode ENTERO() { return getToken(Chems.ENTERO, 0); }
 		public TerminalNode CADENA() { return getToken(Chems.CADENA, 0); }
 		public TerminalNode DECIMAL() { return getToken(Chems.DECIMAL, 0); }
-		public TerminalNode BOOLEANO() { return getToken(Chems.BOOLEANO, 0); }
+		public TerminalNode RBOOLEANO() { return getToken(Chems.RBOOLEANO, 0); }
 		public PrimitivoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -522,17 +522,17 @@ public class Chems extends Parser {
 				    
 				}
 				break;
-			case BOOLEANO:
+			case RBOOLEANO:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(67);
-				((PrimitivoContext)_localctx).BOOLEANO = match(BOOLEANO);
+				((PrimitivoContext)_localctx).RBOOLEANO = match(RBOOLEANO);
 
-				      s, err := strconv.ParseBool((((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getText():null)); 
+				      s, err := strconv.ParseBool((((PrimitivoContext)_localctx).RBOOLEANO!=null?((PrimitivoContext)_localctx).RBOOLEANO.getText():null)); 
 				          if err != nil {
 				          fmt.Println(err)
 				        }
-				      _localctx.p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, (((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getLine():0), (((PrimitivoContext)_localctx).BOOLEANO!=null?((PrimitivoContext)_localctx).BOOLEANO.getCharPositionInLine():0))
+				      _localctx.p = Expresion.NuevoPrimitivo(s, TS.BOOLEANO, (((PrimitivoContext)_localctx).RBOOLEANO!=null?((PrimitivoContext)_localctx).RBOOLEANO.getLine():0), (((PrimitivoContext)_localctx).RBOOLEANO!=null?((PrimitivoContext)_localctx).RBOOLEANO.getCharPositionInLine():0))
 				    
 				}
 				break;
@@ -585,7 +585,7 @@ public class Chems extends Parser {
 		"\2\60\61\f\6\2\2\61\62\t\2\2\2\62\63\5\n\6\7\63\64\b\6\1\2\64;\3\2\2\2"+
 		"\65\66\f\5\2\2\66\67\t\3\2\2\678\5\n\6\689\b\6\1\29;\3\2\2\2:\60\3\2\2"+
 		"\2:\65\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\13\3\2\2\2><\3\2\2\2?@\7"+
-		"\r\2\2@H\b\7\1\2AB\7\20\2\2BH\b\7\1\2CD\7\16\2\2DH\b\7\1\2EF\7\23\2\2"+
+		"\16\2\2@H\b\7\1\2AB\7\21\2\2BH\b\7\1\2CD\7\17\2\2DH\b\7\1\2EF\7\r\2\2"+
 		"FH\b\7\1\2G?\3\2\2\2GA\3\2\2\2GC\3\2\2\2GE\3\2\2\2H\r\3\2\2\2\7\24.:<"+
 		"G";
 	public static final ATN _ATN =

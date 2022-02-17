@@ -17,11 +17,11 @@ public class ChemsLexer extends Lexer {
 		new PredictionContextCache();
 	public static final int
 		RSENTENCIA=1, RCONSOLA=2, RPUBLICO=3, RMAIN=4, RINTEGER=5, RSTRING=6, 
-		RREAL=7, RBOOLEAN=8, RIF=9, RENTONCES=10, ENTERO=11, DECIMAL=12, ID=13, 
-		CADENA=14, COMMENT=15, LINE_COMMENT=16, BOOLEANO=17, COMA=18, PUNTO=19, 
-		PUNTOCOMA=20, OR=21, AND=22, NOT=23, MAYORIGUAL=24, MENORIGUAL=25, MAYORQUE=26, 
-		MENORQUE=27, POR=28, DIV=29, MOD=30, SUMA=31, RESTA=32, PARA=33, PARC=34, 
-		LLAVEA=35, LLAVEC=36, CORA=37, CORC=38, WHITESPACE=39;
+		RREAL=7, RBOOLEAN=8, RIF=9, RENTONCES=10, RBOOLEANO=11, ENTERO=12, DECIMAL=13, 
+		ID=14, CADENA=15, COMMENT=16, LINE_COMMENT=17, COMA=18, PUNTO=19, PUNTOCOMA=20, 
+		OR=21, AND=22, NOT=23, MAYORIGUAL=24, MENORIGUAL=25, MAYORQUE=26, MENORQUE=27, 
+		POR=28, DIV=29, MOD=30, SUMA=31, RESTA=32, PARA=33, PARC=34, LLAVEA=35, 
+		LLAVEC=36, CORA=37, CORC=38, WHITESPACE=39;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -33,8 +33,8 @@ public class ChemsLexer extends Lexer {
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"RSENTENCIA", "RCONSOLA", "RPUBLICO", "RMAIN", "RINTEGER", "RSTRING", 
-			"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "ENTERO", "DECIMAL", "ID", "CADENA", 
-			"COMMENT", "LINE_COMMENT", "BOOLEANO", "COMA", "PUNTO", "PUNTOCOMA", 
+			"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "RBOOLEANO", "ENTERO", "DECIMAL", 
+			"ID", "CADENA", "COMMENT", "LINE_COMMENT", "COMA", "PUNTO", "PUNTOCOMA", 
 			"OR", "AND", "NOT", "MAYORIGUAL", "MENORIGUAL", "MAYORQUE", "MENORQUE", 
 			"POR", "DIV", "MOD", "SUMA", "RESTA", "PARA", "PARC", "LLAVEA", "LLAVEC", 
 			"CORA", "CORC", "WHITESPACE", "ESC_SEQ"
@@ -55,8 +55,8 @@ public class ChemsLexer extends Lexer {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "RSENTENCIA", "RCONSOLA", "RPUBLICO", "RMAIN", "RINTEGER", "RSTRING", 
-			"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "ENTERO", "DECIMAL", "ID", "CADENA", 
-			"COMMENT", "LINE_COMMENT", "BOOLEANO", "COMA", "PUNTO", "PUNTOCOMA", 
+			"RREAL", "RBOOLEAN", "RIF", "RENTONCES", "RBOOLEANO", "ENTERO", "DECIMAL", 
+			"ID", "CADENA", "COMMENT", "LINE_COMMENT", "COMA", "PUNTO", "PUNTOCOMA", 
 			"OR", "AND", "NOT", "MAYORIGUAL", "MENORIGUAL", "MAYORQUE", "MENORQUE", 
 			"POR", "DIV", "MOD", "SUMA", "RESTA", "PARA", "PARC", "LLAVEA", "LLAVEC", 
 			"CORA", "CORC", "WHITESPACE"
@@ -131,16 +131,16 @@ public class ChemsLexer extends Lexer {
 		"\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
 		"\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t"+
 		"\3\t\3\t\3\t\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\f\6\f\u009c\n\f\r\f\16\f\u009d\3\r\6\r\u00a1\n\r\r\r\16\r\u00a2\3\r"+
-		"\3\r\6\r\u00a7\n\r\r\r\16\r\u00a8\3\16\3\16\7\16\u00ad\n\16\f\16\16\16"+
-		"\u00b0\13\16\3\17\3\17\7\17\u00b4\n\17\f\17\16\17\u00b7\13\17\3\17\3\17"+
-		"\3\20\3\20\3\20\3\20\7\20\u00bf\n\20\f\20\16\20\u00c2\13\20\3\20\3\20"+
-		"\3\20\3\20\3\20\3\21\3\21\3\21\3\21\7\21\u00cd\n\21\f\21\16\21\u00d0\13"+
-		"\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u00dd"+
-		"\n\22\3\23\3\23\3\24\3\24\3\25\3\25\3\26\3\26\3\26\3\27\3\27\3\27\3\30"+
+		"\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\5\f\u00a4\n\f\3\r\6\r\u00a7\n\r\r"+
+		"\r\16\r\u00a8\3\16\6\16\u00ac\n\16\r\16\16\16\u00ad\3\16\3\16\6\16\u00b2"+
+		"\n\16\r\16\16\16\u00b3\3\17\3\17\7\17\u00b8\n\17\f\17\16\17\u00bb\13\17"+
+		"\3\20\3\20\7\20\u00bf\n\20\f\20\16\20\u00c2\13\20\3\20\3\20\3\21\3\21"+
+		"\3\21\3\21\7\21\u00ca\n\21\f\21\16\21\u00cd\13\21\3\21\3\21\3\21\3\21"+
+		"\3\21\3\22\3\22\3\22\3\22\7\22\u00d8\n\22\f\22\16\22\u00db\13\22\3\22"+
+		"\3\22\3\23\3\23\3\24\3\24\3\25\3\25\3\26\3\26\3\26\3\27\3\27\3\27\3\30"+
 		"\3\30\3\31\3\31\3\31\3\32\3\32\3\32\3\33\3\33\3\34\3\34\3\35\3\35\3\36"+
 		"\3\36\3\37\3\37\3 \3 \3!\3!\3\"\3\"\3#\3#\3$\3$\3%\3%\3&\3&\3\'\3\'\3"+
-		"(\6(\u010e\n(\r(\16(\u010f\3(\3(\3)\3)\3)\3\u00c0\2*\3\3\5\4\7\5\t\6\13"+
+		"(\6(\u010e\n(\r(\16(\u010f\3(\3(\3)\3)\3)\3\u00cb\2*\3\3\5\4\7\5\t\6\13"+
 		"\7\r\b\17\t\21\n\23\13\25\f\27\r\31\16\33\17\35\20\37\21!\22#\23%\24\'"+
 		"\25)\26+\27-\30/\31\61\32\63\33\65\34\67\359\36;\37= ?!A\"C#E$G%I&K\'"+
 		"M(O)Q\2\3\2\t\3\2\62;\4\2C\\c|\6\2\62;C\\aac|\3\2$$\4\2\f\f\17\17\6\2"+
@@ -153,8 +153,8 @@ public class ChemsLexer extends Lexer {
 		"\2\2\2A\3\2\2\2\2C\3\2\2\2\2E\3\2\2\2\2G\3\2\2\2\2I\3\2\2\2\2K\3\2\2\2"+
 		"\2M\3\2\2\2\2O\3\2\2\2\3S\3\2\2\2\5]\3\2\2\2\7e\3\2\2\2\tm\3\2\2\2\13"+
 		"r\3\2\2\2\rz\3\2\2\2\17\u0081\3\2\2\2\21\u0086\3\2\2\2\23\u008e\3\2\2"+
-		"\2\25\u0091\3\2\2\2\27\u009b\3\2\2\2\31\u00a0\3\2\2\2\33\u00aa\3\2\2\2"+
-		"\35\u00b1\3\2\2\2\37\u00ba\3\2\2\2!\u00c8\3\2\2\2#\u00dc\3\2\2\2%\u00de"+
+		"\2\25\u0091\3\2\2\2\27\u00a3\3\2\2\2\31\u00a6\3\2\2\2\33\u00ab\3\2\2\2"+
+		"\35\u00b5\3\2\2\2\37\u00bc\3\2\2\2!\u00c5\3\2\2\2#\u00d3\3\2\2\2%\u00de"+
 		"\3\2\2\2\'\u00e0\3\2\2\2)\u00e2\3\2\2\2+\u00e4\3\2\2\2-\u00e7\3\2\2\2"+
 		"/\u00ea\3\2\2\2\61\u00ec\3\2\2\2\63\u00ef\3\2\2\2\65\u00f2\3\2\2\2\67"+
 		"\u00f4\3\2\2\29\u00f6\3\2\2\2;\u00f8\3\2\2\2=\u00fa\3\2\2\2?\u00fc\3\2"+
@@ -172,30 +172,30 @@ public class ChemsLexer extends Lexer {
 		"\u008c\7c\2\2\u008c\u008d\7p\2\2\u008d\22\3\2\2\2\u008e\u008f\7k\2\2\u008f"+
 		"\u0090\7h\2\2\u0090\24\3\2\2\2\u0091\u0092\7g\2\2\u0092\u0093\7p\2\2\u0093"+
 		"\u0094\7v\2\2\u0094\u0095\7q\2\2\u0095\u0096\7p\2\2\u0096\u0097\7e\2\2"+
-		"\u0097\u0098\7g\2\2\u0098\u0099\7u\2\2\u0099\26\3\2\2\2\u009a\u009c\t"+
-		"\2\2\2\u009b\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d\u009b\3\2\2\2\u009d"+
-		"\u009e\3\2\2\2\u009e\30\3\2\2\2\u009f\u00a1\t\2\2\2\u00a0\u009f\3\2\2"+
-		"\2\u00a1\u00a2\3\2\2\2\u00a2\u00a0\3\2\2\2\u00a2\u00a3\3\2\2\2\u00a3\u00a4"+
-		"\3\2\2\2\u00a4\u00a6\7\60\2\2\u00a5\u00a7\t\2\2\2\u00a6\u00a5\3\2\2\2"+
-		"\u00a7\u00a8\3\2\2\2\u00a8\u00a6\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\32"+
-		"\3\2\2\2\u00aa\u00ae\t\3\2\2\u00ab\u00ad\t\4\2\2\u00ac\u00ab\3\2\2\2\u00ad"+
-		"\u00b0\3\2\2\2\u00ae\u00ac\3\2\2\2\u00ae\u00af\3\2\2\2\u00af\34\3\2\2"+
-		"\2\u00b0\u00ae\3\2\2\2\u00b1\u00b5\7$\2\2\u00b2\u00b4\n\5\2\2\u00b3\u00b2"+
-		"\3\2\2\2\u00b4\u00b7\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b5\u00b6\3\2\2\2\u00b6"+
-		"\u00b8\3\2\2\2\u00b7\u00b5\3\2\2\2\u00b8\u00b9\7$\2\2\u00b9\36\3\2\2\2"+
-		"\u00ba\u00bb\7*\2\2\u00bb\u00bc\7,\2\2\u00bc\u00c0\3\2\2\2\u00bd\u00bf"+
-		"\13\2\2\2\u00be\u00bd\3\2\2\2\u00bf\u00c2\3\2\2\2\u00c0\u00c1\3\2\2\2"+
-		"\u00c0\u00be\3\2\2\2\u00c1\u00c3\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c3\u00c4"+
-		"\7,\2\2\u00c4\u00c5\7+\2\2\u00c5\u00c6\3\2\2\2\u00c6\u00c7\b\20\2\2\u00c7"+
-		" \3\2\2\2\u00c8\u00c9\7\61\2\2\u00c9\u00ca\7\61\2\2\u00ca\u00ce\3\2\2"+
-		"\2\u00cb\u00cd\n\6\2\2\u00cc\u00cb\3\2\2\2\u00cd\u00d0\3\2\2\2\u00ce\u00cc"+
-		"\3\2\2\2\u00ce\u00cf\3\2\2\2\u00cf\u00d1\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d1"+
-		"\u00d2\b\21\2\2\u00d2\"\3\2\2\2\u00d3\u00d4\7v\2\2\u00d4\u00d5\7t\2\2"+
-		"\u00d5\u00d6\7w\2\2\u00d6\u00dd\7g\2\2\u00d7\u00d8\7h\2\2\u00d8\u00d9"+
-		"\7c\2\2\u00d9\u00da\7n\2\2\u00da\u00db\7u\2\2\u00db\u00dd\7g\2\2\u00dc"+
-		"\u00d3\3\2\2\2\u00dc\u00d7\3\2\2\2\u00dd$\3\2\2\2\u00de\u00df\7.\2\2\u00df"+
-		"&\3\2\2\2\u00e0\u00e1\7\60\2\2\u00e1(\3\2\2\2\u00e2\u00e3\7=\2\2\u00e3"+
-		"*\3\2\2\2\u00e4\u00e5\7~\2\2\u00e5\u00e6\7~\2\2\u00e6,\3\2\2\2\u00e7\u00e8"+
+		"\u0097\u0098\7g\2\2\u0098\u0099\7u\2\2\u0099\26\3\2\2\2\u009a\u009b\7"+
+		"v\2\2\u009b\u009c\7t\2\2\u009c\u009d\7w\2\2\u009d\u00a4\7g\2\2\u009e\u009f"+
+		"\7h\2\2\u009f\u00a0\7c\2\2\u00a0\u00a1\7n\2\2\u00a1\u00a2\7u\2\2\u00a2"+
+		"\u00a4\7g\2\2\u00a3\u009a\3\2\2\2\u00a3\u009e\3\2\2\2\u00a4\30\3\2\2\2"+
+		"\u00a5\u00a7\t\2\2\2\u00a6\u00a5\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\u00a6"+
+		"\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\32\3\2\2\2\u00aa\u00ac\t\2\2\2\u00ab"+
+		"\u00aa\3\2\2\2\u00ac\u00ad\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ad\u00ae\3\2"+
+		"\2\2\u00ae\u00af\3\2\2\2\u00af\u00b1\7\60\2\2\u00b0\u00b2\t\2\2\2\u00b1"+
+		"\u00b0\3\2\2\2\u00b2\u00b3\3\2\2\2\u00b3\u00b1\3\2\2\2\u00b3\u00b4\3\2"+
+		"\2\2\u00b4\34\3\2\2\2\u00b5\u00b9\t\3\2\2\u00b6\u00b8\t\4\2\2\u00b7\u00b6"+
+		"\3\2\2\2\u00b8\u00bb\3\2\2\2\u00b9\u00b7\3\2\2\2\u00b9\u00ba\3\2\2\2\u00ba"+
+		"\36\3\2\2\2\u00bb\u00b9\3\2\2\2\u00bc\u00c0\7$\2\2\u00bd\u00bf\n\5\2\2"+
+		"\u00be\u00bd\3\2\2\2\u00bf\u00c2\3\2\2\2\u00c0\u00be\3\2\2\2\u00c0\u00c1"+
+		"\3\2\2\2\u00c1\u00c3\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c3\u00c4\7$\2\2\u00c4"+
+		" \3\2\2\2\u00c5\u00c6\7*\2\2\u00c6\u00c7\7,\2\2\u00c7\u00cb\3\2\2\2\u00c8"+
+		"\u00ca\13\2\2\2\u00c9\u00c8\3\2\2\2\u00ca\u00cd\3\2\2\2\u00cb\u00cc\3"+
+		"\2\2\2\u00cb\u00c9\3\2\2\2\u00cc\u00ce\3\2\2\2\u00cd\u00cb\3\2\2\2\u00ce"+
+		"\u00cf\7,\2\2\u00cf\u00d0\7+\2\2\u00d0\u00d1\3\2\2\2\u00d1\u00d2\b\21"+
+		"\2\2\u00d2\"\3\2\2\2\u00d3\u00d4\7\61\2\2\u00d4\u00d5\7\61\2\2\u00d5\u00d9"+
+		"\3\2\2\2\u00d6\u00d8\n\6\2\2\u00d7\u00d6\3\2\2\2\u00d8\u00db\3\2\2\2\u00d9"+
+		"\u00d7\3\2\2\2\u00d9\u00da\3\2\2\2\u00da\u00dc\3\2\2\2\u00db\u00d9\3\2"+
+		"\2\2\u00dc\u00dd\b\22\2\2\u00dd$\3\2\2\2\u00de\u00df\7.\2\2\u00df&\3\2"+
+		"\2\2\u00e0\u00e1\7\60\2\2\u00e1(\3\2\2\2\u00e2\u00e3\7=\2\2\u00e3*\3\2"+
+		"\2\2\u00e4\u00e5\7~\2\2\u00e5\u00e6\7~\2\2\u00e6,\3\2\2\2\u00e7\u00e8"+
 		"\7(\2\2\u00e8\u00e9\7(\2\2\u00e9.\3\2\2\2\u00ea\u00eb\7#\2\2\u00eb\60"+
 		"\3\2\2\2\u00ec\u00ed\7@\2\2\u00ed\u00ee\7?\2\2\u00ee\62\3\2\2\2\u00ef"+
 		"\u00f0\7>\2\2\u00f0\u00f1\7?\2\2\u00f1\64\3\2\2\2\u00f2\u00f3\7@\2\2\u00f3"+
@@ -208,7 +208,7 @@ public class ChemsLexer extends Lexer {
 		"\2\2\2\u010c\u010e\t\7\2\2\u010d\u010c\3\2\2\2\u010e\u010f\3\2\2\2\u010f"+
 		"\u010d\3\2\2\2\u010f\u0110\3\2\2\2\u0110\u0111\3\2\2\2\u0111\u0112\b("+
 		"\2\2\u0112P\3\2\2\2\u0113\u0114\7^\2\2\u0114\u0115\t\b\2\2\u0115R\3\2"+
-		"\2\2\f\2\u009d\u00a2\u00a8\u00ae\u00b5\u00c0\u00ce\u00dc\u010f\3\b\2\2";
+		"\2\2\f\2\u00a3\u00a8\u00ad\u00b3\u00b9\u00c0\u00cb\u00d9\u010f\3\b\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
