@@ -32,7 +32,11 @@ instrucciones returns [*arrayList.List l]
 
 
 instruccion returns [interfaces.Instruccion instr]
-  : RSENTENCIA PUNTO RCONSOLA PARA expression PARC PUNTOCOMA {$instr = Instrucciones.NuevoImprimir($expression.p, $RSENTENCIA.line, $RSENTENCIA.pos )}
+  : imprimir_instr PUNTOCOMA { $instr = $imprimir_instr}
+;
+
+imprimir_instr returns [interfaces.Instruccion instr]
+  : RSENTENCIA PUNTO RCONSOLA PARA expression PARC {$instr = Instrucciones.NuevoImprimir($expression.p, $RSENTENCIA.line, $RSENTENCIA.pos )}
 ;
 
 expression returns[interfaces.Expresion p]

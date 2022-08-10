@@ -1,11 +1,10 @@
+sentencia.consola(false);
 sentencia.consola(2);
 sentencia.consola(2);
 sentencia.consola(2);
-sentencia.consola("hola");
 sentencia.consola(6+6*8);
 sentencia.consola(10+6.5);
 sentencia.consola(1);
 sentencia.consola(6+9);
 sentencia.consola("hola" +" Maria");
 sentencia.consola("hola" + 6.6);
-sentencia.consola(58.3%3);
